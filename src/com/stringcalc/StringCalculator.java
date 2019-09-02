@@ -2,6 +2,9 @@ package com.stringcalc;
 
 public class StringCalculator {
     public static int add(String s) {
-        return 0;
+        if (s.isEmpty()) {
+            return 0;
+        }
+        return Integer.parseInt(s);
     }
 }
