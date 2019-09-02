@@ -13,4 +13,12 @@ public class StringCalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldReturnTheSingleNumberItIsGiven() {
+        int actual = StringCalculator.add("1");
+        int expected = 1;
+
+        assertEquals(expected, actual);
+    }
 }
