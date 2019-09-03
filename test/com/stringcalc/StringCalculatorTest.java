@@ -29,4 +29,13 @@ public class StringCalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldReturnTheSumOFMoreNumbers() {
+        int actual = StringCalculator.add("1,2,3");
+        int expected = 6;
+
+        assertEquals(expected, actual);
+    }
+
 }
