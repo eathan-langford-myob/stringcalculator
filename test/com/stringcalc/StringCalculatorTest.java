@@ -8,8 +8,8 @@ public class StringCalculatorTest {
 
     @Test
     public void shouldReturnZeroWhenGivenAnEmptyString() {
-        int actual = StringCalculator.add("");
-        int expected = 0;
+        int actual = StringCalculator.add("1,2");
+        int expected = 3;
 
         assertEquals(expected, actual);
     }
@@ -18,6 +18,14 @@ public class StringCalculatorTest {
     public void shouldReturnTheSingleNumberItIsGiven() {
         int actual = StringCalculator.add("1");
         int expected = 1;
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldReturnTheSumOfTwoNumbersGiven() {
+        int actual = StringCalculator.add("1,2");
+        int expected = 3;
 
         assertEquals(expected, actual);
     }
