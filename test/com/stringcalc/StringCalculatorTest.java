@@ -38,4 +38,9 @@ public class StringCalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldReturnTheSumOfNumbersWithInterchangeableDelimiter() {
+        int actual = StringCalculator.add("1,2\n3");
+        int expected = 6;
+    }
 }
