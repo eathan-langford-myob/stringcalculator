@@ -42,5 +42,7 @@ public class StringCalculatorTest {
     public void shouldReturnTheSumOfNumbersWithInterchangeableDelimiter() {
         int actual = StringCalculator.add("1,2\n3");
         int expected = 6;
+
+        assertEquals(expected, actual);
     }
 }
