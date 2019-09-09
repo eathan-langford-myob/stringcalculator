@@ -45,4 +45,12 @@ public class StringCalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldReturnTheSumOfNumbersWithTheDeclaredDelimiter() {
+        int actual = StringCalculator.add("//;\n1;2");
+        int expected = 3;
+
+        assertEquals(expected, actual);
+    }
 }
