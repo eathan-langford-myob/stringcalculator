@@ -56,7 +56,7 @@ public class StringCalculatorTest {
 
         assertEquals(expected, actual);
     }
-    
+
     @Rule
     public final ExpectedException negativeNumericException = ExpectedException.none();
 
@@ -64,5 +64,12 @@ public class StringCalculatorTest {
         negativeNumericException.expect(Exception.class);
         negativeNumericException.expectMessage(CoreMatchers.containsString("Negative numbers not allowed: "));
         StringCalculator.add("-1,2,-3");
+    }
+
+    @Test public void shouldIgnoreNumbersGreaterThan1000() throws Exception{
+        int actual = StringCalculator.add("1000,10001,2");
+        int expected = 2;
+
+        assertEquals(expected, actual);
     }
 }
