@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
-    public static int add(String s) {
+    public static int add(String s) throws Exception {
         List<String> supportedDelimiters = new ArrayList<>();
         String semiColon = (s.contains(";")?";":null);
         String newLine = (s.contains("\n")?"\n":null);
@@ -15,7 +15,6 @@ public class StringCalculator {
         supportedDelimiters.add(newLine);
         supportedDelimiters.add(comma);
         List<String> numbersExtractedWithComma;
-
         if (s.startsWith("//")){
             String[] splitStringWithDelimiter = s.split("\n");
             supportedDelimiters.add(splitStringWithDelimiter[0].replace("//", ""));
@@ -31,6 +30,19 @@ public class StringCalculator {
         }
 
         numbersExtractedWithComma = Arrays.asList(s.split(comma));
+        ArrayList<String> negativeNumbers = new ArrayList<>();
+        String exceptionMessage = "Negative numbers not allowed: ";
+        for (String number:numbersExtractedWithComma
+             ) {
+            if (number.startsWith("-")) {
+                negativeNumbers.add(number);
+                exceptionMessage = exceptionMessage + number + ", ";
+            }
+        }
+        if (negativeNumbers.size()>0){
+            System.out.println(exceptionMessage);
+            throw new Exception(exceptionMessage);
+        }
         return numbersExtractedWithComma.stream()
                 .map(Integer::parseInt).mapToInt(Integer::intValue).sum();
     }
