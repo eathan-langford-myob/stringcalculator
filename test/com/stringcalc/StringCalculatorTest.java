@@ -79,4 +79,11 @@ public class StringCalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test public void shouldAllowforMultiDeclaredDelimiters() throws Exception{
+        int actual = StringCalculator.add("//[***][#][%]\n1***2#3%4");
+        int expected = 10;
+
+        assertEquals(actual, expected);
+    }
 }
