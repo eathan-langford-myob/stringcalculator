@@ -3,37 +3,45 @@ package com.stringcalc;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StringCalculator {
-    public static int add(String s) throws Exception {
+
+    public static List<String> checkSupportedDelimiters(String stringInput) throws Exception {
         List<String> supportedDelimiters = new ArrayList<>();
-        String semiColon = (s.contains(";")?";":null);
-        String newLine = (s.contains("\n")?"\n":null);
+        String semiColon = (stringInput.contains(";")?";":null);
+        String newLine = (stringInput.contains("\n")?"\n":null);
         String comma = ",";
         supportedDelimiters.add(semiColon);
         supportedDelimiters.add(newLine);
         supportedDelimiters.add(comma);
-        List<String> numbersExtractedWithComma;
-        if (s.startsWith("//")){
-            String[] splitStringWithDelimiter = s.split("\n");
+        return supportedDelimiters;
+    }
+
+    public static String extractStringFromDeclaredDelimiter(String stringInput, List<String> supportedDelimiters) throws Exception {
+        if (stringInput.startsWith("//")){
+            String[] splitStringWithDelimiter = stringInput.split("\n");
             supportedDelimiters.add(splitStringWithDelimiter[0].replace("//", ""));
-            s = splitStringWithDelimiter[1];
-
-        }else if (s.chars().allMatch(Character::isDigit)){
-            return Integer.parseInt(s);
+            stringInput = splitStringWithDelimiter[1];
+            return stringInput;
         }
+        return stringInput;
+    }
 
+    public static String replaceDelimitersWithCommas(String stringInput, List<String> supportedDelimiters) {
         for (String delimiter:supportedDelimiters
         ) {
-            if(delimiter!=null) s = s.replace(delimiter, ",");
+            if(delimiter!=null){
+                stringInput = stringInput.replace(delimiter, ",");
+            }
         }
+        return stringInput;
+    }
 
-        numbersExtractedWithComma = Arrays.asList(s.split(comma));
+    public static void checkForNegativeNumbers (List<String> numbersExtractedWithCommas) throws Exception{
         ArrayList<String> negativeNumbers = new ArrayList<>();
         String exceptionMessage = "Negative numbers not allowed: ";
-        for (String number:numbersExtractedWithComma
-             ) {
+        for (String number:numbersExtractedWithCommas
+        ) {
             if (number.startsWith("-")) {
                 negativeNumbers.add(number);
                 exceptionMessage = exceptionMessage + number + ", ";
@@ -43,6 +51,20 @@ public class StringCalculator {
             System.out.println(exceptionMessage);
             throw new Exception(exceptionMessage);
         }
+    }
+
+    public static int add(String stringInput) throws Exception {
+
+        if (stringInput.chars().allMatch(Character::isDigit)){
+            return Integer.parseInt(stringInput);
+        }
+
+        List<String> supportedDelimiters = checkSupportedDelimiters(stringInput);
+        stringInput = extractStringFromDeclaredDelimiter(stringInput, supportedDelimiters);
+        stringInput = replaceDelimitersWithCommas(stringInput, supportedDelimiters);
+        List<String> numbersExtractedWithComma = Arrays.asList(stringInput.split(","));
+        checkForNegativeNumbers(numbersExtractedWithComma);
+
         return numbersExtractedWithComma.stream()
                 .map(Integer::parseInt).mapToInt(Integer::intValue).sum();
     }
