@@ -17,11 +17,21 @@ public class StringCalculator {
         return supportedDelimiters;
     }
 
+    public static String checkForLongerDelimiters(String delimiterFromString){
+        if (delimiterFromString.contains("[")) {
+            return delimiterFromString.replace("[", "").replace("]", "");
+        }
+        return delimiterFromString;
+    }
+
     public static String extractStringFromDeclaredDelimiter(String stringInput, List<String> supportedDelimiters) {
         if (stringInput.startsWith("//")){
             String[] splitStringWithDelimiter = stringInput.split("\n");
-            supportedDelimiters.add(splitStringWithDelimiter[0].replace("//", ""));
-            stringInput = splitStringWithDelimiter[1];
+            String delimiterFromString = splitStringWithDelimiter[0];
+            String numbersFromString = splitStringWithDelimiter[1];
+            delimiterFromString = checkForLongerDelimiters(delimiterFromString);
+            supportedDelimiters.add(delimiterFromString.replace("//", ""));
+            stringInput = numbersFromString;
             return stringInput;
         }
         return stringInput;
