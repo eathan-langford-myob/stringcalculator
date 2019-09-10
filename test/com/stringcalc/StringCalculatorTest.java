@@ -72,4 +72,11 @@ public class StringCalculatorTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test public void shouldAllowForDelimitersOfAnyLength() throws Exception{
+        int actual = StringCalculator.add("//[***]\n1***2***3");
+        int expected = 6;
+
+        assertEquals(expected, actual);
+    }
 }
