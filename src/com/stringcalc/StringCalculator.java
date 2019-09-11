@@ -17,28 +17,15 @@ public class StringCalculator {
         return supportedDelimiters;
     }
 
-    public static void extractDelimiterFromDeclaredDelimiter(String delimiterFromString, List<String> supportedDelimiters){
-        if (delimiterFromString.contains("[")) {
-            delimiterFromString.replace("[", "").replace("]", "");
-//            return supportedDelimiters = supportedDelimiters.add(delimiterFromString);
-        }
-//        return delimiterFromString;
-    }
 
     public static String extractStringFromDeclaredDelimiter(String stringInput, List<String> supportedDelimiters) {
         if (stringInput.startsWith("//")){
             String[] splitStringWithDelimiter = stringInput.split("\n");
             String delimiterFromString = splitStringWithDelimiter[0];
             String numbersFromString = splitStringWithDelimiter[1];
-//            supportedDelimiters.add(delimiterFromString.replace("//", ""));
-
-//            extractDelimiterFromDeclaredDelimiter(delimiterFromString, supportedDelimiters);
-            //supportedDelimiters.add(delimiterFromString.replace("//", ""));
-            //START TEST
             delimiterFromString=delimiterFromString.replace("//","").replace("[", "").replace("]", ",");
             String[] arrayOfDelimiters = delimiterFromString.split(",");
             supportedDelimiters.addAll(Arrays.asList(arrayOfDelimiters));
-            //END TEST
             stringInput = numbersFromString;
             return stringInput;
         }
@@ -71,14 +58,14 @@ public class StringCalculator {
         }
     }
 
-    public static List<String> compileDelimiterList(String stringInput, List<String> supportedDelimiters){
-        String[] splitStringWithDelimiter = stringInput.split("\n");
-        String delimiterFromString = splitStringWithDelimiter[0];
-        delimiterFromString=delimiterFromString.replace("//","").replace("[", "").replace("]", ",");
-        String[] arrayOfDelimiters = delimiterFromString.split(",");
-        supportedDelimiters.addAll(Arrays.asList(arrayOfDelimiters));
-        return supportedDelimiters;
-    }
+//    public static List<String> compileDelimiterList(String stringInput, List<String> supportedDelimiters){
+//        String[] splitStringWithDelimiter = stringInput.split("\n");
+//        String delimiterFromString = splitStringWithDelimiter[0];
+//        delimiterFromString=delimiterFromString.replace("//","").replace("[", "").replace("]", ",");
+//        String[] arrayOfDelimiters = delimiterFromString.split(",");
+//        supportedDelimiters.addAll(Arrays.asList(arrayOfDelimiters));
+//        return supportedDelimiters;
+//    }
 
     public static int add(String stringInput) throws Exception {
 
