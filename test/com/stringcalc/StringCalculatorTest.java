@@ -86,4 +86,10 @@ public class StringCalculatorTest {
 
         assertEquals(expected, actual);
     }
+    @Test public void shouldAllowForNumberDelimiters() throws Exception{
+        int actual = StringCalculator.add("//[*1*][%]\n1*1*2%3");
+        int expected = 6;
+
+        assertEquals(expected, actual);
+    }
 }
