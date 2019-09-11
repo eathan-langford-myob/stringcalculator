@@ -17,11 +17,12 @@ public class StringCalculator {
         return supportedDelimiters;
     }
 
-    public static String checkForLongerDelimiters(String delimiterFromString){
+    public static void extractDelimiterFromDeclaredDelimiter(String delimiterFromString, List<String> supportedDelimiters){
         if (delimiterFromString.contains("[")) {
-            return delimiterFromString.replace("[", "").replace("]", "");
+            delimiterFromString.replace("[", "").replace("]", "");
+//            return supportedDelimiters = supportedDelimiters.add(delimiterFromString);
         }
-        return delimiterFromString;
+//        return delimiterFromString;
     }
 
     public static String extractStringFromDeclaredDelimiter(String stringInput, List<String> supportedDelimiters) {
@@ -29,8 +30,15 @@ public class StringCalculator {
             String[] splitStringWithDelimiter = stringInput.split("\n");
             String delimiterFromString = splitStringWithDelimiter[0];
             String numbersFromString = splitStringWithDelimiter[1];
-            delimiterFromString = checkForLongerDelimiters(delimiterFromString);
-            supportedDelimiters.add(delimiterFromString.replace("//", ""));
+//            supportedDelimiters.add(delimiterFromString.replace("//", ""));
+
+//            extractDelimiterFromDeclaredDelimiter(delimiterFromString, supportedDelimiters);
+            //supportedDelimiters.add(delimiterFromString.replace("//", ""));
+            //START TEST
+            delimiterFromString=delimiterFromString.replace("//","").replace("[", "").replace("]", ",");
+            String[] arrayOfDelimiters = delimiterFromString.split(",");
+            supportedDelimiters.addAll(Arrays.asList(arrayOfDelimiters));
+            //END TEST
             stringInput = numbersFromString;
             return stringInput;
         }
@@ -63,14 +71,13 @@ public class StringCalculator {
         }
     }
 
-    public static List<String> checkForNumbersGreaterThan1000 (List<String> numbersExtractedWithComma){
-        for (String number:numbersExtractedWithComma
-             ) {
-            if (Integer.parseInt(number)>=1000){
-                numbersExtractedWithComma.remove(number);
-            }
-        }
-        return numbersExtractedWithComma;
+    public static List<String> compileDelimiterList(String stringInput, List<String> supportedDelimiters){
+        String[] splitStringWithDelimiter = stringInput.split("\n");
+        String delimiterFromString = splitStringWithDelimiter[0];
+        delimiterFromString=delimiterFromString.replace("//","").replace("[", "").replace("]", ",");
+        String[] arrayOfDelimiters = delimiterFromString.split(",");
+        supportedDelimiters.addAll(Arrays.asList(arrayOfDelimiters));
+        return supportedDelimiters;
     }
 
     public static int add(String stringInput) throws Exception {
