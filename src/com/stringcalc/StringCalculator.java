@@ -58,14 +58,6 @@ public class StringCalculator {
         }
     }
 
-//    public static List<String> compileDelimiterList(String stringInput, List<String> supportedDelimiters){
-//        String[] splitStringWithDelimiter = stringInput.split("\n");
-//        String delimiterFromString = splitStringWithDelimiter[0];
-//        delimiterFromString=delimiterFromString.replace("//","").replace("[", "").replace("]", ",");
-//        String[] arrayOfDelimiters = delimiterFromString.split(",");
-//        supportedDelimiters.addAll(Arrays.asList(arrayOfDelimiters));
-//        return supportedDelimiters;
-//    }
 
     public static int add(String stringInput) throws Exception {
 
